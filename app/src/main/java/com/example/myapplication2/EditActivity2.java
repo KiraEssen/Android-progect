@@ -1,5 +1,6 @@
 package com.example.myapplication2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -33,13 +34,14 @@ public class EditActivity2 extends AppCompatActivity {
     }
 
     public void saveChange(View view) {
-        Intent saveChange = new Intent(EditActivity2.this, MainActivity.class);
+        Intent saveChange = new Intent();
 
         saveChange.putExtra("etName", etName.getText().toString());
         saveChange.putExtra("etDate", etDate.getText().toString());
         saveChange.putExtra("etEmail", etEmail.getText().toString());
 
-        startActivity(saveChange);
+        setResult(RESULT_OK, saveChange);
+        finish();
     }
 
 }

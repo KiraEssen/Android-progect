@@ -1,5 +1,6 @@
 package com.example.myapplication2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE = 0;
 
     private TextView tvFullName;
     private TextView tvDateOfBirth;
@@ -22,14 +25,6 @@ public class MainActivity extends AppCompatActivity {
         tvFullName = findViewById(R.id.fullName);
         tvDateOfBirth = findViewById(R.id.dateOfBirth);
         tvEmail = findViewById(R.id.email);
-
-        Bundle arguments = getIntent().getExtras();
-
-        if(arguments!=null){
-            tvFullName.setText(arguments.get("etName").toString());
-            tvDateOfBirth.setText(arguments.get("etDate").toString());
-            tvEmail.setText(arguments.get("etEmail").toString());
-        }
     }
 
     public void newActivity(View view) {
@@ -39,6 +34,19 @@ public class MainActivity extends AppCompatActivity {
         editActivity.putExtra("txDate", tvDateOfBirth.getText().toString());
         editActivity.putExtra("txEmail", tvEmail.getText().toString());
 
-        startActivity(editActivity);
+        startActivityForResult(editActivity, REQUEST_CODE);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK){
+            if(requestCode == REQUEST_CODE){
+                tvFullName.setText(data.getStringExtra("etName"));
+                tvDateOfBirth.setText(data.getStringExtra("etDate"));
+                tvEmail.setText(data.getStringExtra("etEmail"));
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }
