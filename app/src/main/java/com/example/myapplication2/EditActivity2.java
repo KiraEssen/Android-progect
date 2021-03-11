@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class EditActivity2 extends AppCompatActivity {
+    public final static String TXNAME = "txName";
+    public final static String TXDATE = "txDate";
+    public final static String TXEMAIL = "txEmail";
 
     private EditText etName;
     private EditText etDate;
@@ -27,18 +30,18 @@ public class EditActivity2 extends AppCompatActivity {
         etEmail = findViewById(R.id.editTextEmail);
 
         if(arguments!=null){
-            etName.setText(arguments.get("txName").toString());
-            etDate.setText(arguments.get("txDate").toString());
-            etEmail.setText(arguments.get("txEmail").toString());
+            etName.setText(arguments.get(TXNAME).toString());
+            etDate.setText(arguments.get(TXDATE).toString());
+            etEmail.setText(arguments.get(TXEMAIL).toString());
         }
     }
 
     public void saveChange(View view) {
         Intent saveChange = new Intent();
 
-        saveChange.putExtra("etName", etName.getText().toString());
-        saveChange.putExtra("etDate", etDate.getText().toString());
-        saveChange.putExtra("etEmail", etEmail.getText().toString());
+        saveChange.putExtra(TXNAME, etName.getText().toString());
+        saveChange.putExtra(TXDATE, etDate.getText().toString());
+        saveChange.putExtra(TXEMAIL, etEmail.getText().toString());
 
         setResult(RESULT_OK, saveChange);
         finish();

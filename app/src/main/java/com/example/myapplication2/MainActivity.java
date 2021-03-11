@@ -12,6 +12,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 0;
 
+    public final static String TXNAME = "txName";
+    public final static String TXDATE = "txDate";
+    public final static String TXEMAIL = "txEmail";
+
     private TextView tvFullName;
     private TextView tvDateOfBirth;
     private TextView tvEmail;
@@ -30,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
     public void newActivity(View view) {
         Intent editActivity = new Intent(MainActivity.this, EditActivity2.class);
 
-        editActivity.putExtra("txName", tvFullName.getText().toString());
-        editActivity.putExtra("txDate", tvDateOfBirth.getText().toString());
-        editActivity.putExtra("txEmail", tvEmail.getText().toString());
+        editActivity.putExtra(TXNAME, tvFullName.getText().toString());
+        editActivity.putExtra(TXDATE, tvDateOfBirth.getText().toString());
+        editActivity.putExtra(TXEMAIL, tvEmail.getText().toString());
 
         startActivityForResult(editActivity, REQUEST_CODE);
     }
@@ -41,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(resultCode == RESULT_OK){
             if(requestCode == REQUEST_CODE){
-                tvFullName.setText(data.getStringExtra("etName"));
-                tvDateOfBirth.setText(data.getStringExtra("etDate"));
-                tvEmail.setText(data.getStringExtra("etEmail"));
+                tvFullName.setText(data.getStringExtra(TXNAME));
+                tvDateOfBirth.setText(data.getStringExtra(TXDATE));
+                tvEmail.setText(data.getStringExtra(TXEMAIL));
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
